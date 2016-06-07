@@ -55,7 +55,6 @@ local bundleWithArgs=( $1 );
 local bundle="${bundleWithArgs[0]}";
 shift;
 
-echo $bundle;
 if [ ! -z "$bundle" ];then
         bundleTimeEpochA=`echo $bundle | cut -d\_ -f2`;
         bundleTimeEpoch=`expr $bundleTimeEpochA / 1000`;
