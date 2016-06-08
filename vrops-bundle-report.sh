@@ -1,7 +1,7 @@
 #!/bin/bash
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-. "$DIR/vrops-support-extraction"
+. "$DIR/vrops-support-extraction.sh"
 
 ###########################
 ## Main Function
