@@ -60,8 +60,8 @@ if [ ! -z "$bundle" ];then
         bundleTimeEpoch=`expr $bundleTimeEpochA / 1000`;
         bundleDate=`date -d @$bundleTimeEpoch +%Y-%m-%d`;
 	echo "A log bundle was passed to the script, extracting to directory $bundleDate.";
-	unzip $bundle -d $bundleDate;
-        cd $bundleDate;
+	unzip $bundle -d $bundleDate-$bundleTimeEpoch;
+        cd $bundleDate-$bundleTimeEpoch;
 	echo "The current working directory is:";
 	pwd;
 else
