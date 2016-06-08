@@ -1,6 +1,8 @@
 #!/bin/bash
+# Locate current location of the pull from github
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+# Import the extraction module
 . "$DIR/vrops-support-extraction.sh"
 
 ###########################
