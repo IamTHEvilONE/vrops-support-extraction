@@ -6,6 +6,8 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/vrops-support-extraction.sh"
 . "$DIR/vrops-report-generator.sh"
 
+reportName="00-vROpsSupportBundleReport.txt"
+
 ###########################
 ## Main Function
 ###########################
@@ -33,4 +35,4 @@ reportBuildsAndPaks;
 # generate node specs
 reportNodeSpecs $nodes;
 # view the report
-less 01-basicinfo.txt;
+less $reportName;

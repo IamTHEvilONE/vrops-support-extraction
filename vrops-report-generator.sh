@@ -16,7 +16,7 @@ echo "# vRealize Operations Manager Support Bundle Report #">> $report;
 echo "#####################################################" >> $report;
 echo "">> $report;
 
-if [ ! -z "$bundle" ];then
+if [ ! -z "$bundleTime" ];then
     echo "--== Bundle Info ==--">> $report;
     # what time was the bundle collected
     echo "The Support Bundle was created on $bundleTime" >> $report;
@@ -35,7 +35,7 @@ function reportBuildsAndPaks() {
 # shift;
 
 # what are the deployed builds?
-echo "What build numbers are deployed in the cluster? (Supported configs should only show 1 build below)";
+echo "What build numbers are deployed in the cluster? (Supported configs should only show 1 build below)" >> $report;
 egrep RELEASENUMBER */slice-info/conf/.buildInfo | awk -F"RELEASENUMBER:" '{ print $2 }' | sort -u >> $report;
 echo "">>$report;
 
