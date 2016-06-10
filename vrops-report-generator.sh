@@ -1,24 +1,29 @@
 #!/bin/bash
 # define the report filename
-report="00-vROpsSupportBundleReport.txt";
 errorLog="errorReport.txt";
 
 ############################################
 # Create the header, import arg=$bundleTime
 ############################################
 function reportHeader() {
-local importedArgs=( $1 );
-shift;
+local report=( $1 );
+
+#Once extracted, set some variables
+local bundleTimeEpochA=`ls | grep cluster | cut -d\_ -f2`;
+local bundleTimeEpoch=`expr $bundleTimeEpochA / 1000`;
+local bundleTime=`date -d @$bundleTimeEpoch`;
+local bundleDate=`date -d @$bundleTimeEpoch +%Y-%m-%d`;
+
 
 echo "#####################################################" >> $report;
 echo "# vRealize Operations Manager Support Bundle Report #">> $report;
 echo "#####################################################" >> $report;
 echo "">> $report;
 
-if [ ! -z "$importedArgs" ];then
+if [ ! -z "$bundleTime" ];then
     echo "--== Bundle Info ==--">> $report;
     # what time was the bundle collected
-    echo "The Support Bundle was created on $importedArgs" >> $report;
+    echo "The Support Bundle was created on $bundleTime" >> $report;
     echo "">>$report;
 else
 	echo "Nothing passed to reportHeader" >> $errorLog;
@@ -29,9 +34,7 @@ fi
 # Report on what Paks are installed
 ############################################
 function reportBuildsAndPaks() {
-# local importedArgs=( $1 );
-# local bundleTime="${importedArgs[0]}";
-# shift;
+local report=( $1 );
 
 # what are the deployed builds?
 echo "What build numbers are deployed in the cluster? (Supported configs should only show 1 build below)" >> $report;
@@ -48,9 +51,10 @@ echo "">>$report;
 # Report on each node
 ############################################
 function reportNodeSpecs() {
-local importedArgs=( $1 );
-local nodes="${importedArgs[0]}";
-shift;
+local report=( $1 );
+
+# Generate the list of node names based on the folders in the directory
+nodes=`ls | grep -v cluster`;
 
 echo "Rundown of each Node, in no particular order">> $report;
 for node in $nodes

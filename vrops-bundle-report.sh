@@ -18,21 +18,11 @@ vropsRenameZips;
 # Unzip the zip files if required
 vropsUnzip;
 
-#Once extracted, set some variables
-bundleTimeEpochA=`ls | grep cluster | cut -d\_ -f2`;
-bundleTimeEpoch=`expr $bundleTimeEpochA / 1000`;
-bundleTime=`date -d @$bundleTimeEpoch`;
-bundleDate=`date -d @$bundleTimeEpoch +%Y-%m-%d`;
-# echo "$bundleDate / $bundleTime - $bundleTimeEpoch";
-
-# Generate the list of node names based on the folders in the directory
-nodes=`ls | grep -v cluster`;
-
 # Generate the report header
-reportHeader "$bundleTime";
+reportHeader $reportName;
 # Get build info
-reportBuildsAndPaks;
+reportBuildsAndPaks $reportName;
 # generate node specs
-reportNodeSpecs $nodes;
+reportNodeSpecs $reportName;
 # view the report
 less $reportName;
