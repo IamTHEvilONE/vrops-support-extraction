@@ -4,11 +4,10 @@ report="00-vROpsSupportBundleReport.txt";
 errorLog="errorReport.txt";
 
 ############################################
-# Create the header, requires $bundleTime
+# Create the header, import arg=$bundleTime
 ############################################
 function reportHeader() {
 local importedArgs=( $1 );
-local bundleTime="${importedArgs[0]}";
 shift;
 
 echo "#####################################################" >> $report;
@@ -16,10 +15,10 @@ echo "# vRealize Operations Manager Support Bundle Report #">> $report;
 echo "#####################################################" >> $report;
 echo "">> $report;
 
-if [ ! -z "$bundleTime" ];then
+if [ ! -z "$importedArgs" ];then
     echo "--== Bundle Info ==--">> $report;
     # what time was the bundle collected
-    echo "The Support Bundle was created on $bundleTime" >> $report;
+    echo "The Support Bundle was created on $importedArgs" >> $report;
     echo "">>$report;
 else
 	echo "Nothing passed to reportHeader" >> $errorLog;
@@ -46,7 +45,7 @@ echo "">>$report;
 }
 
 ############################################
-# Create the header, requires $bundleTime
+# Report on each node
 ############################################
 function reportNodeSpecs() {
 local importedArgs=( $1 );
