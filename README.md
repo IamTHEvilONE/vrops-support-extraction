@@ -1,8 +1,8 @@
 # vrops-support-extraction
 The purpose of this application is to extract and perform basic reporting on a vRealize Operations support bundle.
 
-#  Usage {cluster_supportBundle_masterNodeName.zip}
-vrops-bundle-report.sh <support bundle tarball>
+#  Usage
+vrops-bundle-report.sh {cluster_supportBundle_masterNodeName.zip}
 - when a tarball is passed into the utility, it wille extract all files to a temporary directory
 - when a tarball is not passed into the utility, the assumption is that the support bundle was extracted to the current directory 
 
