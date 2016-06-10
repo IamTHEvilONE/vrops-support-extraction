@@ -54,7 +54,7 @@ function reportNodeSpecs() {
 local report=( $1 );
 
 # Generate the list of node names based on the folders in the directory
-nodes=`ls | grep -v cluster`;
+nodes=`ls | grep -v cluster | grep -v $report | grep -v $errorLog`;
 
 echo "Rundown of each Node, in no particular order">> $report;
 for node in $nodes
