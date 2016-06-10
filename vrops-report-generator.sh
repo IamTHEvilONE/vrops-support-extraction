@@ -8,25 +8,25 @@ errorLog="errorReport.txt";
 function reportHeader() {
 local report=( $1 );
 
-#Once extracted, set some variables
-local bundleTimeEpochA=`ls | grep cluster | cut -d\_ -f2`;
-local bundleTimeEpoch=`expr $bundleTimeEpochA / 1000`;
-local bundleTime=`date -d @$bundleTimeEpoch`;
-local bundleDate=`date -d @$bundleTimeEpoch +%Y-%m-%d`;
-
-
 echo "#####################################################" >> $report;
 echo "# vRealize Operations Manager Support Bundle Report #">> $report;
 echo "#####################################################" >> $report;
 echo "">> $report;
 
-if [ ! -z "$bundleTime" ];then
+#Once extracted, set some variables
+local bundleTimeEpochA=`ls | grep cluster | cut -d\_ -f2`;
+
+if [ ! -z "$bundleTimeEpochA" ];then
+    local bundleTimeEpoch=`expr $bundleTimeEpochA / 1000`;
+    local bundleTime=`date -d @$bundleTimeEpoch`;
+    local bundleDate=`date -d @$bundleTimeEpoch +%Y-%m-%d`;
+
     echo "--== Bundle Info ==--">> $report;
     # what time was the bundle collected
     echo "The Support Bundle was created on $bundleTime" >> $report;
     echo "">>$report;
 else
-	echo "Nothing passed to reportHeader" >> $errorLog;
+	echo "Cluster Component doesn't exist, omitting from report." >> $errorLog;
 fi
 }
 
