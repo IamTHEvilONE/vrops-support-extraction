@@ -29,7 +29,7 @@ bundleDate=`date -d @$bundleTimeEpoch +%Y-%m-%d`;
 nodes=`ls | grep -v cluster`;
 
 # Generate the report header
-reportHeader $bundleTime;
+reportHeader "$bundleTime";
 # Get build info
 reportBuildsAndPaks;
 # generate node specs
