@@ -26,7 +26,8 @@ if [ ! -z "$bundleTimeEpochA" ];then
     echo "The Support Bundle was created on $bundleTime" >> $report;
     echo "">>$report;
 else
-	echo "Cluster Component doesn't exist, omitting from report." >> $errorLog;
+	echo "Cluster Component doesn't exist, omitting from report." >> $report;
+    echo "`date` - ERROR - Cluster Support Bundle is missing from the report." >> $errorLog;
 fi
 }
 
