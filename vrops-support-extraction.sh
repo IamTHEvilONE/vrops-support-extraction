@@ -5,14 +5,14 @@
 ############################################
 function vropsRenameZips() {
 	if [ `ls | grep -E ^"([0-9]{1,3}[\.]){3}[0-9]{1,3}" | wc -l` -gt 0 ];then
-	        echo "Log bundle dected with IP instead of node name, therefore renaming.";
+	    echo "Log bundle dected with IP instead of node name, therefore renaming.";
 		unzip cluster*.zip -d `ls cluster*.zip | cut -d\_ -f1-2` > unzip.log;
 		rm unzip.log;
 		rm cluster*.zip;
 		for i in `ls | grep -E ^"([0-9]{1,3}[\.]){3}[0-9]{1,3}"`; 
 		do
-			ip=`echo $i | cut -d\_ -f1`; 
-			name=`egrep "Host: \[\/$ip\]" -B2 cluster_*/clusterInfo/platformInfo.txt | head -n1 | cut -d\- -f2- | tr '[:upper:]' '[:lower:]'`; 
+			local ip=`echo $i | cut -d\_ -f1`; 
+			local name=`egrep "Host: \[\/$ip\]" -B2 cluster_*/clusterInfo/platformInfo.txt | head -n1 | cut -d\- -f2 | tr '[:upper:]' '[:lower:]'`; 
 			echo "Rename $i to $name"; 
             mv $i $name"_"`echo $i | cut -d\_ -f2-`; 
 		done;
@@ -32,7 +32,7 @@ if [ `ls | egrep zip$ | wc -l` -gt 0 ];then
 	echo "There are zip files in the current directory, so unpacking them.";
 	for i in `ls *.zip`;
 	do
-		# show what file we are on
+            # show what file we are on
 	        echo " > $i";
        		# unzip the file
 	        unzip $i -d `echo $i | cut -d\_ -f1` > `echo $i | cut -d\_ -f1`.log;
