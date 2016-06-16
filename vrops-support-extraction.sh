@@ -12,7 +12,7 @@ function vropsRenameZips() {
 		for i in `ls | grep -E ^"([0-9]{1,3}[\.]){3}[0-9]{1,3}"`; 
 		do
 			local ip=`echo $i | cut -d\_ -f1`; 
-			local name=`egrep "Host: \[\/$ip\]" -B2 cluster_*/clusterInfo/platformInfo.txt | head -n1 | cut -d\- -f2 | tr '[:upper:]' '[:lower:]'`; 
+			local name=`cat -v cluster_*/clusterInfo/platformInfo.txt | egrep "Host: \[\/$ip\]" -B2 | head -n1 | cut -d\- -f2- | cut -d\^ -f1 | tr '[:upper:]' '[:lower:]'`; 
 			echo "Rename $i to $name"; 
             mv $i $name"_"`echo $i | cut -d\_ -f2-`; 
 		done;
