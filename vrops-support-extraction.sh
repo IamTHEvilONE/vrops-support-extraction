@@ -13,7 +13,7 @@ function vropsRenameZips() {
 		do
 			local ip=`echo $i | cut -d\_ -f1`; 
 			local name=`cat -v cluster_*/clusterInfo/platformInfo.txt | egrep "Host: \[\/$ip\]" -B2 | head -n1 | cut -d\- -f2- | cut -d\^ -f1 | tr '[:upper:]' '[:lower:]'`; 
-			echo "Rename $i to $name"; 
+			echo "Renaming $i to use $name instead of $ip"; 
             mv $i $name"_"`echo $i | cut -d\_ -f2-`; 
 		done;
 	fi

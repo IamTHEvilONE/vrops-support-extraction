@@ -40,6 +40,8 @@ local report=( $1 );
 # what are the deployed builds?
 echo "What build numbers are deployed in the cluster? (Supported configs should only show 1 build below)" >> $report;
 egrep RELEASENUMBER */slice-info/conf/.buildInfo | awk -F"RELEASENUMBER:" '{ print $2 }' | sort -u >> $report;
+local build=`cat -v  */slice-info/conf/.buildInfo | egrep RELEASENUMBER | awk -F"RELEASENUMBER:" '{ print $2 }' | sort -u`;
+echo $build;
 echo "">>$report;
 
 # Locate the pak files that have been installed and then put them out to screen
